@@ -1,0 +1,29 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+
+app.post('/chat', (req, res) => {
+    const userMessage = req.body.message;
+    let botResponse;
+
+    if (userMessage.toLowerCase().includes('matemática')) {
+        botResponse = 'A matemática é a ciência dos números, formas e padrões. Você tem alguma dúvida específica?';
+    } else if (userMessage.toLowerCase().includes('música educativa')) {
+        botResponse = 'Aqui está uma música educativa sobre matemática: [link para música].';
+    } else if (userMessage.toLowerCase().includes('dúvida')) {
+        botResponse = 'Claro, estou aqui para ajudar! Qual é a sua dúvida sobre matemática?';
+    } else {
+        botResponse = 'Desculpe, não entendi. Você pode perguntar sobre matemática, música educativa ou tirar dúvidas.';
+    }
+
+    res.send({ response: botResponse });
+});
+
+app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+});
+
+
